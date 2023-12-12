@@ -1,6 +1,4 @@
 import streamlit as st
-
-st.header("import streamlit as st
 import pandas as pd
 
 @st.cache_data()
@@ -19,6 +17,8 @@ def load_df():
     max_age=df.Age.max()
 
     return df, survival_options, p_class_options, embark_options, sex_options, min_fare, max_fare, min_age, max_age
+
+
 
 
 def check_rows(column, options):
@@ -42,16 +42,24 @@ min_fare_range, max_fare_range=range_cols[0].slider("Lowest Fare", float(min_far
 min_age_range, max_age_range=range_cols[2].slider("Lowest Age", float(min_age),float(max_fare),[float(min_age), float(max_age)])
 
 
+
+
+
 if name_query != "":
     res = res.loc[res.Name.str.contains(name_query)]
+   
 if survival:
     res = check_rows("Survived",survival)
+
 if p_class:
     res = check_rows("P_class",p_class)
+
 if sex:
     res = check_rows("Sex",sex)
+
 if embark:
     res = check_rows("Embarked",embark)
+
 if range_cols[0].checkbox("Use Fare Range"):
     res=res.loc[(res.Fare > min_fare_range) & (res.Fare > min_fare_range)]
 
@@ -61,4 +69,7 @@ removal_columns = st.multiselect("Select Columns to Remove",df.columns.tolist())
 
 for column in removal_columns:
     res=res.drop(column, axis=1)
-st.write(res)")
+st.write(res)
+
+    
+
